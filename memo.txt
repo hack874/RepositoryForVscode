@@ -1,0 +1,25 @@
+script.jsの全体を軽く見てわからない点を質問。
+
+■function saveTasks()について
+
+1.localstrorageについて。具体的にどこに保存されるの
+
+2.js文字列に変換する理由も
+
+
+
+■function addTask()について
+
+1.本todoアプリにおいて新しいタスクオブジェクト作成する理由とtasks配列には何が入る想定か。
+
+jsについて理解したこと:
+・const taskList = const taskInput = document.getElementById("taskInput")
+このときtaskListは変数であり要素である(DOM)
+
+■動的な複数の要素を持つリストを作成する考え方
+・ulタグ(棚)を作成しておく(html)
+・li(箱)を作成(js側)
+・liにspan(商品1)やdeleteBtn(商品2)をappendする
+・商品が入った箱を(棚)に配置する(taskList.append(li))
+
+
