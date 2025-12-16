@@ -29,9 +29,6 @@ addBtn.addEventListener('click', function() {
     //taskListにli要素たちを追加
     taskList.appendChild(li);
 
-
-    console.log(taskList);
-
     //タスクを追加した後の入力欄クリア処理
     taskInput.value = '';
 });
