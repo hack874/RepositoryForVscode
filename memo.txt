@@ -6,7 +6,8 @@ script.jsの全体を軽く見てわからない点を質問。
 
 2.js文字列に変換する理由も
 
-
+複数行コメントアウト
+shift alt a
 
 ■function addTask()について
 

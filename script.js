@@ -1,47 +1,62 @@
-const taskInput = document.getElementById("taskInput")//input要素全体を取得(一度だけ)
-const addBtn = document.getElementById("addBtn")
-const taskList = document.getElementById("taskList")
+const taskInput = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const taskList = document.getElementById("taskList");
+const taskCount = document.getElementById('taskCount');
+const clearCompleted = document.getElementById("clearCompleted");
 
-/*--- 追加ボタンが押された時の処理 ---*/
-addBtn.addEventListener('click', function() {
-    const taskText = taskInput.value//入力された値を取得
+addBtn.addEventListener("click", function () {    
+    const taskText = taskInput.value;
 
-    if (taskText.trim() === '') {
-        alert('入力されていません')
-        return;//関数終了
+    if (taskText.trim() === "") {
+        alert("入力されていません");
+        return;
     }
 
-    //span要素とBtn要素を入れる箱を作成→最終的にulの中へ(ulは商品棚)
-    const li = document.createElement('li')
+    // ========== 1. 要素作成 ==========
+    const li = document.createElement("li");
     
-    //タスク用のspan要素を作成してtextContentプロパティを指定(文字列のみ)
-    const span = document.createElement('span')
+    const checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    
+    const span = document.createElement("span");
     span.textContent = taskText;
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "削除";
 
-    //削除ボタン用のBtn要素を作成してtextContentプロセスを指定(文字列のみ)
-    const Btn = document.createElement('button')//行単位でボタンを作るためli
-    Btn.textContent = '削除';
+    // ========== 2. イベント設定 ==========
+    checkBox.addEventListener("change", function () {
+        if (checkBox.checked) {
+            span.classList.add("completed");
+        } else {
+            span.classList.remove("completed");
+        }
+    });
 
-    //li箱に要素を追加
+    deleteBtn.addEventListener("click", function () {
+        li.remove();
+        taskCount.textContent = taskList.children.length;
+    });
+
+    clearCompleted.addEventListener('click', function() {
+        const items = taskList.children;
+        for (let i = 0; i < items.length; i++){
+            const li = items[i];
+            if (checkBox.checked === true){
+                li.remove();
+                taskCount.textContent = taskList.children.length;
+            }
+        }
+    });
+
+    // ========== 3. DOM追加 ==========
+    li.appendChild(checkBox);
     li.appendChild(span);
-    li.appendChild(Btn);
-
-    //taskListにli要素たちを追加
+    li.appendChild(deleteBtn);
+    
     taskList.appendChild(li);
 
-    //タスクを追加した後の入力欄クリア処理
-    taskInput.value = '';
+    // ========== 4. 後処理 ==========
+    taskCount.textContent = taskList.children.length;
+    taskInput.value = "";
 });
-
-/* --- 削除ボタンが押された時の処理 --- */
-
-
-
-
-
-
-
-
-
-
-                                        

@@ -126,6 +126,11 @@ h1 {
     transform: translateX(5px);
 }
 
+.completed{
+    text-decoration: line-through; /* 取り消し線 */
+    opacity: 0.5; /* 薄くする */
+}
+
 /* 完了済みタスク */
 .task-item.completed {
     opacity: 0.6;
