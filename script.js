@@ -53,13 +53,43 @@ addBtn.addEventListener("click", function () {
     li.appendChild(checkBox);
     li.appendChild(span);
     li.appendChild(deleteBtn);
-    
-    taskList.appendChild(li);
 
+    taskList.appendChild(li);
+    
     // ----- 4. 後処理 -----
     taskCount.textContent = taskList.children.length;
     taskInput.value = "";
 });
+
+// ========== フィルター =========
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+//filterBtnsたちに対してclickをつけている
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', function () {
+        //全てのボタンの色をもとに戻す
+        filterBtns.forEach(b => b.classList.remove('active'));
+
+        //押されたボタンの色を変える
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter; // all / active / completed
+        
+        Array.from(taskList.children).forEach(li => {
+            const checkBox = li.querySelector('input[type="checkbox"]');
+            
+            
+            if (filter === 'all') {
+                li.style.display = '';
+            } else if (filter === 'active') {
+                li.style.display = checkBox.checked ? 'none' : ''//未完了のときチェックされているものを非表示にする
+            } else if (filter === 'completed') {
+                li.style.display = checkBox.checked ? '' : 'none';
+            }
+        });
+    });
+});
+
 
 // ========== 完了済みタスク一括削除 ==========
 clearCompleted.addEventListener('click', function() {
